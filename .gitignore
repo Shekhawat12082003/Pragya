@@ -1,0 +1,6 @@
+node_modules/
+.env
+desktop/pragya_memory.json
+dist/
+__pycache__/
+*.pyc

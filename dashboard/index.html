@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pragya AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&family=Exo+2:wght@100;200;300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--cyan:#00d4ff;--cyan-dim:#0099cc;--cyan-glow:rgba(0,212,255,0.15);--cyan-glow2:rgba(0,212,255,0.05);--bg:#000408;--bg2:#010c14;--text:#a0d8ef;--text-dim:#3a6a88;--border:rgba(0,212,255,0.12);--green:#00ff88;--amber:#ffaa00}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Exo 2',sans-serif;font-weight:200;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);animation:scan 4s linear infinite;z-index:1000;opacity:.5}
+@keyframes scan{0%{transform:translateY(0)}100%{transform:translateY(100vh)}}
+body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,212,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.02) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0}
+header{position:fixed;top:0;left:0;right:0;height:52px;background:rgba(0,4,8,.95);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 24px;z-index:100;backdrop-filter:blur(12px)}
+.logo{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:20px;letter-spacing:4px;color:var(--cyan);text-transform:uppercase}.logo span{color:var(--text-dim);font-weight:300}
+.hc{display:flex;align-items:center;gap:6px}
+.sdot{width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan);animation:pdot 2s ease-in-out infinite}
+.sdot.g{background:var(--green);box-shadow:0 0 8px var(--green)}.sdot.a{background:var(--amber);box-shadow:0 0 12px var(--amber);animation:pf .5s ease-in-out infinite}
+@keyframes pdot{0%,100%{opacity:1}50%{opacity:.4}}@keyframes pf{0%,100%{opacity:1}50%{opacity:.2}}
+#stxt{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cyan-dim);letter-spacing:2px;text-transform:uppercase}
+.hr{display:flex;align-items:center;gap:20px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--text-dim);letter-spacing:1px}
+main{padding-top:52px;display:grid;grid-template-columns:280px 1fr 280px;height:100vh}
+.pl,.pr{background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow-y:auto;padding:16px;gap:12px}
+.pr{border-right:none;border-left:1px solid var(--border)}
+.w{border:1px solid var(--border);border-radius:2px;padding:14px;background:rgba(0,212,255,.02);position:relative;overflow:hidden}
+.w::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--cyan);opacity:.4}
+.wt{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--cyan-dim);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.wt::after{content:'';flex:1;height:1px;background:var(--border)}
+#clk{font-family:'Rajdhani',sans-serif;font-size:38px;font-weight:300;color:var(--cyan);letter-spacing:4px;line-height:1}
+#dstr{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:2px;margin-top:4px}
+.sr{display:flex;flex-direction:column;gap:4px;margin-bottom:10px}
+.sl{display:flex;justify-content:space-between;font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:1px}
+.sb{height:3px;background:rgba(0,212,255,.08);border-radius:1px;overflow:hidden}
+.sf{height:100%;background:var(--cyan);box-shadow:0 0 6px var(--cyan);transition:width 1s ease}
+.sf.a{background:var(--amber);box-shadow:0 0 6px var(--amber)}.sf.g{background:var(--green);box-shadow:0 0 6px var(--green)}
+.ll{display:flex;flex-direction:column;gap:6px;max-height:160px;overflow-y:auto}
+.li{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--text-dim);display:flex;gap:8px;padding:4px 0;border-bottom:1px solid rgba(0,212,255,.04);animation:fi .3s ease}
+@keyframes fi{from{opacity:0;transform:translateX(-4px)}to{opacity:1;transform:translateX(0)}}
+.lt{color:var(--cyan-dim);min-width:52px}.li.warn .lm{color:var(--amber)}.li.ok .lm{color:var(--green)}
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.sk{padding:6px 8px;border:1px solid var(--border);font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:1px;text-align:center;color:var(--text-dim);cursor:pointer;transition:all .2s}
+.sk:hover,.sk.on{border-color:var(--cyan);color:var(--cyan);background:var(--cyan-glow2)}.sk.on{box-shadow:0 0 8px rgba(0,212,255,.2)}
+.ct{display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.oc{position:relative;width:260px;height:260px;cursor:pointer;z-index:10}
+#orb-canvas{display:block;cursor:pointer}
+.wf{display:flex;align-items:center;gap:3px;height:40px;margin-top:20px}
+.wb{width:3px;background:var(--cyan);border-radius:2px;opacity:.4;height:4px}
+.wf.on .wb{animation:wv .6s ease-in-out infinite;opacity:.9}
+.wb:nth-child(1){animation-delay:0s}.wb:nth-child(2){animation-delay:.05s}.wb:nth-child(3){animation-delay:.1s}.wb:nth-child(4){animation-delay:.15s}.wb:nth-child(5){animation-delay:.2s}.wb:nth-child(6){animation-delay:.25s}.wb:nth-child(7){animation-delay:.3s}.wb:nth-child(8){animation-delay:.35s}.wb:nth-child(9){animation-delay:.4s}.wb:nth-child(10){animation-delay:.45s}.wb:nth-child(11){animation-delay:.5s}.wb:nth-child(12){animation-delay:.55s}
+@keyframes wv{0%,100%{height:4px}50%{height:28px}}
+#pst{font-family:'Share Tech Mono',monospace;font-size:12px;letter-spacing:4px;color:var(--cyan-dim);text-transform:uppercase;margin-top:12px;text-align:center}
+.ir{display:flex;gap:8px;margin-top:28px;width:100%;max-width:520px;z-index:10}
+.ci{flex:1;background:rgba(0,212,255,.04);border:1px solid var(--border);color:var(--cyan);padding:10px 16px;font-family:'Share Tech Mono',monospace;font-size:12px;letter-spacing:1px;outline:none;transition:border-color .2s}
+.ci:focus{border-color:var(--cyan);background:var(--cyan-glow2)}.ci::placeholder{color:var(--text-dim)}
+.bm,.bs{width:44px;height:44px;background:rgba(0,212,255,.08);border:1px solid var(--border);color:var(--cyan);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;font-size:16px}
+.bm:hover,.bs:hover{background:var(--cyan-glow);border-color:var(--cyan)}.bm.on{background:rgba(255,160,0,.15);border-color:var(--amber);color:var(--amber);animation:pf .5s infinite}
+#msgs{width:100%;max-width:520px;max-height:180px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;margin-top:16px;z-index:10;padding:0 4px}
+.msg{padding:8px 12px;font-family:'Exo 2',sans-serif;font-size:13px;font-weight:300;border-left:2px solid var(--border);animation:fi .3s ease}
+.msg.u{background:rgba(0,212,255,.04);border-left:none;border-right:2px solid var(--cyan-dim);align-self:flex-end;text-align:right}
+.msg.p{background:rgba(0,212,255,.02);border-left-color:var(--cyan)}
+.ml{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--cyan);margin-bottom:3px}.msg.u .ml{color:var(--cyan-dim)}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--border)}
+.ctl,.ctr,.cbl,.cbr{position:absolute;width:20px;height:20px;z-index:1}
+.ctl{top:16px;left:16px;border-top:1px solid var(--cyan-dim);border-left:1px solid var(--cyan-dim)}
+.ctr{top:16px;right:16px;border-top:1px solid var(--cyan-dim);border-right:1px solid var(--cyan-dim)}
+.cbl{bottom:16px;left:16px;border-bottom:1px solid var(--cyan-dim);border-left:1px solid var(--cyan-dim)}
+.cbr{bottom:16px;right:16px;border-bottom:1px solid var(--cyan-dim);border-right:1px solid var(--cyan-dim)}
+.cmds{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;justify-content:center;max-width:520px;z-index:10}
+.cc{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:1px;padding:4px 10px;border:1px solid rgba(0,212,255,.15);color:var(--text-dim);cursor:pointer;transition:all .2s}
+.cc:hover{border-color:var(--cyan);color:var(--cyan);background:var(--cyan-glow2)}
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(60px);background:rgba(0,4,8,.95);border:1px solid var(--cyan);padding:10px 24px;font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--cyan);z-index:999;transition:transform .3s;box-shadow:0 0 20px rgba(0,212,255,.2)}
+#toast.show{transform:translateX(-50%) translateY(0)}
+
+/* ── SIRI POPUP ── */
+#siri-popup{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(120px) scale(0.85);opacity:0;pointer-events:none;z-index:2000;transition:transform .45s cubic-bezier(.34,1.56,.64,1),opacity .35s ease;display:flex;flex-direction:column;align-items:center;gap:10px}
+#siri-popup.show{transform:translateX(-50%) translateY(0) scale(1);opacity:1;pointer-events:auto}
+#siri-pill{background:rgba(4,2,12,.92);border:1px solid rgba(160,60,255,.35);border-radius:60px;padding:10px 20px 10px 12px;display:flex;align-items:center;gap:12px;box-shadow:0 0 32px rgba(140,0,255,.25),0 0 80px rgba(100,0,200,.12),inset 0 0 20px rgba(120,0,220,.06);backdrop-filter:blur(20px);min-width:220px}
+#siri-orb-wrap{width:44px;height:44px;flex-shrink:0;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center}
+#siri-canvas{display:block}
+#siri-info{display:flex;flex-direction:column;gap:2px;flex:1}
+#siri-name{font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:600;letter-spacing:3px;color:#cc66ff;text-shadow:0 0 12px rgba(180,60,255,.6);text-transform:uppercase}
+#siri-status{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;color:#7744aa;transition:color .3s}
+#siri-status.active{color:#cc88ff;text-shadow:0 0 8px rgba(180,80,255,.5)}
+#siri-waveform{display:flex;align-items:center;gap:2px;height:20px}
+#siri-waveform span{display:block;width:2px;background:#9944cc;border-radius:2px;height:3px;transition:height .1s}
+#siri-close{width:22px;height:22px;border-radius:50%;border:1px solid rgba(160,60,255,.25);background:rgba(100,0,180,.15);color:#7744aa;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;transition:all .2s}
+#siri-close:hover{border-color:rgba(200,100,255,.5);color:#cc88ff}
+#siri-transcript{font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:1px;color:#cc88ff;background:rgba(60,0,100,.4);border:1px solid rgba(140,50,255,.2);border-radius:20px;padding:6px 18px;max-width:320px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:0;transition:opacity .3s;min-height:30px;display:flex;align-items:center;justify-content:center}
+#siri-transcript.show{opacity:1}
+@keyframes siri-wb{0%,100%{height:3px}50%{height:16px}}
+#siri-waveform.active span:nth-child(1){animation:siri-wb .5s ease-in-out infinite 0s}
+#siri-waveform.active span:nth-child(2){animation:siri-wb .5s ease-in-out infinite .07s}
+#siri-waveform.active span:nth-child(3){animation:siri-wb .5s ease-in-out infinite .14s}
+#siri-waveform.active span:nth-child(4){animation:siri-wb .5s ease-in-out infinite .21s}
+#siri-waveform.active span:nth-child(5){animation:siri-wb .5s ease-in-out infinite .14s}
+#siri-waveform.active span:nth-child(6){animation:siri-wb .5s ease-in-out infinite .07s}
+#siri-waveform.active span:nth-child(7){animation:siri-wb .5s ease-in-out infinite 0s}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">PRAGYA<span> / AI</span></div>
+  <div class="hc"><div class="sdot" id="sdot"></div><span id="stxt">STANDBY — SAY "PRAGYA"</span></div>
+  <div class="hr"><span id="ht">--:--:--</span><span>|</span><span>SYS v2.1</span><span>|</span><span id="sc" style="color:var(--cyan)">0</span> CMDS</div>
+</header>
+<main>
+<div class="pl">
+  <div class="w"><div class="wt">Clock</div><div id="clk">00:00</div><div id="dstr">LOADING...</div></div>
+  <div class="w"><div class="wt">System</div>
+    <div class="sr"><div class="sl"><span>CPU</span><span id="cv">0%</span></div><div class="sb"><div class="sf a" id="cb" style="width:0%"></div></div></div>
+    <div class="sr"><div class="sl"><span>MEM</span><span id="mv">0%</span></div><div class="sb"><div class="sf" id="mb" style="width:0%"></div></div></div>
+    <div class="sr"><div class="sl"><span>AI LATENCY</span><span id="lv">0ms</span></div><div class="sb"><div class="sf g" id="lb" style="width:0%"></div></div></div>
+    <div class="sr"><div class="sl"><span>VOICE CONF</span><span id="vv">0%</span></div><div class="sb"><div class="sf g" id="vb" style="width:0%"></div></div></div>
+  </div>
+  <div class="w"><div class="wt">Capabilities</div><div class="sg">
+    <div class="sk on" onclick="this.classList.toggle('on')">VOICE</div><div class="sk on" onclick="this.classList.toggle('on')">SEARCH</div>
+    <div class="sk" onclick="this.classList.toggle('on')">SMART HOME</div><div class="sk on" onclick="this.classList.toggle('on')">EMAIL</div>
+    <div class="sk on" onclick="this.classList.toggle('on')">CALENDAR</div><div class="sk" onclick="this.classList.toggle('on')">MUSIC</div>
+    <div class="sk on" onclick="this.classList.toggle('on')">CODE</div><div class="sk" onclick="this.classList.toggle('on')">CAMERA</div>
+  </div></div>
+  <div class="w"><div class="wt">Wake word</div>
+    <div style="text-align:center;padding:8px 0">
+      <div style="font-family:'Rajdhani',sans-serif;font-size:28px;color:var(--cyan);letter-spacing:8px;font-weight:600">PRAGYA</div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--text-dim);letter-spacing:2px;margin-top:4px">ALWAYS LISTENING</div>
+    </div>
+  </div>
+</div>
+
+<div class="ct">
+  <div class="ctl"></div><div class="ctr"></div><div class="cbl"></div><div class="cbr"></div>
+  <div class="oc" onclick="activateManual()"><canvas id="orb-canvas" width="260" height="260"></canvas></div>
+  <div class="wf" id="wf"><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div></div>
+  <div id="pst">STANDBY</div>
+  <div id="msgs"></div>
+  <div class="cmds">
+    <div class="cc" onclick="sq('What time is it?')">TIME</div>
+    <div class="cc" onclick="sq('Tell me a fun fact')">FUN FACT</div>
+    <div class="cc" onclick="sq('What can you do?')">CAPABILITIES</div>
+    <div class="cc" onclick="sq('Tell me a joke')">JOKE</div>
+    <div class="cc" onclick="sq('Set a reminder for tomorrow')">REMINDER</div>
+  </div>
+  <div class="ir">
+    <input class="ci" id="ci" type="text" placeholder="Type a command or say 'pragya'..." onkeydown="if(event.key==='Enter')sendText()"/>
+    <button class="bm" id="bm" onclick="toggleMic()">&#127908;</button>
+    <button class="bs" onclick="sendText()">&#10148;</button>
+  </div>
+</div>
+
+<div class="pr">
+  <div class="w"><div class="wt">Activity log</div><div class="ll" id="log">
+    <div class="li ok"><span class="lt">00:00:00</span><span class="lm">PRAGYA initialized</span></div>
+    <div class="li"><span class="lt">00:00:00</span><span class="lm">Wake word engine ready</span></div>
+  </div></div>
+  <div class="w"><div class="wt">Session stats</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <div style="text-align:center;padding:8px;border:1px solid var(--border)"><div style="font-family:'Rajdhani',sans-serif;font-size:26px;color:var(--cyan)" id="st">0</div><div style="font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--text-dim);letter-spacing:1px">TOTAL</div></div>
+      <div style="text-align:center;padding:8px;border:1px solid var(--border)"><div style="font-family:'Rajdhani',sans-serif;font-size:26px;color:var(--green)" id="so">0</div><div style="font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--text-dim);letter-spacing:1px">SUCCESS</div></div>
+      <div style="text-align:center;padding:8px;border:1px solid var(--border)"><div style="font-family:'Rajdhani',sans-serif;font-size:26px;color:var(--amber)" id="sv">0</div><div style="font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--text-dim);letter-spacing:1px">VOICE</div></div>
+      <div style="text-align:center;padding:8px;border:1px solid var(--border)"><div style="font-family:'Rajdhani',sans-serif;font-size:26px;color:var(--text-dim)" id="stc">0</div><div style="font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--text-dim);letter-spacing:1px">TEXT</div></div>
+    </div>
+  </div>
+  <div class="w"><div class="wt">Recent commands</div>
+    <div id="rc" style="display:flex;flex-direction:column;gap:6px;max-height:160px;overflow-y:auto">
+      <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--text-dim)">No commands yet...</div>
+    </div>
+  </div>
+  <div class="w"><div class="wt">Phase tracker</div><div style="display:flex;flex-direction:column;gap:8px">
+    <div style="display:flex;align-items:center;gap:8px"><div style="width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green)"></div><span style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--green)">PHASE 1 — Voice + Chat</span></div>
+    <div style="display:flex;align-items:center;gap:8px"><div style="width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green)"></div><span style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--green)">PHASE 2 — Tools + APIs</span></div>
+    <div style="display:flex;align-items:center;gap:8px"><div style="width:8px;height:8px;border-radius:50%;background:var(--amber)"></div><span style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--text-dim)">PHASE 3 — Memory + RAG</span></div>
+    <div style="display:flex;align-items:center;gap:8px"><div style="width:8px;height:8px;border-radius:50%;border:1px solid var(--text-dim)"></div><span style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--text-dim)">PHASE 4 — OS Control</span></div>
+    <div style="display:flex;align-items:center;gap:8px"><div style="width:8px;height:8px;border-radius:50%;border:1px solid var(--text-dim)"></div><span style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--text-dim)">PHASE 5 — Proactive AI</span></div>
+  </div></div>
+</div>
+</main>
+
+<!-- SIRI POPUP -->
+<div id="siri-popup">
+  <div id="siri-transcript"></div>
+  <div id="siri-pill">
+    <div id="siri-orb-wrap"><canvas id="siri-canvas" width="44" height="44"></canvas></div>
+    <div id="siri-info">
+      <div id="siri-name">PRAGYA</div>
+      <div id="siri-status">STANDBY</div>
+    </div>
+    <div id="siri-waveform"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    <div id="siri-close" onclick="hideSiri()">✕</div>
+  </div>
+</div>
+
+<div id="toast"></div>
+<script>
+// Clock
+function tick(){const n=new Date(),h=String(n.getHours()).padStart(2,'0'),m=String(n.getMinutes()).padStart(2,'0'),s=String(n.getSeconds()).padStart(2,'0');document.getElementById('clk').textContent=h+':'+m;document.getElementById('ht').textContent=h+':'+m+':'+s;const D=['SUN','MON','TUE','WED','THU','FRI','SAT'],M=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];document.getElementById('dstr').textContent=D[n.getDay()]+' '+n.getDate()+' '+M[n.getMonth()]+' '+n.getFullYear()}
+setInterval(tick,1000);tick();
+function stats(){const c=Math.round(20+Math.random()*40),m=Math.round(45+Math.random()*25),l=Math.round(80+Math.random()*120),v=Math.round(85+Math.random()*15);document.getElementById('cv').textContent=c+'%';document.getElementById('mv').textContent=m+'%';document.getElementById('lv').textContent=l+'ms';document.getElementById('vv').textContent=v+'%';document.getElementById('cb').style.width=c+'%';document.getElementById('mb').style.width=m+'%';document.getElementById('lb').style.width=Math.min(l/3,100)+'%';document.getElementById('vb').style.width=v+'%'}
+setInterval(stats,2000);stats();
+
+// WebSocket
+let ws=null;
+function connectWS(){try{ws=new WebSocket('ws://localhost:8765');ws.onopen=()=>{addLog('Backend connected','ok');toast('BACKEND CONNECTED')};ws.onmessage=(e)=>{const d=JSON.parse(e.data);if(d.type==='state')setState(d.state);if(d.type==='response'){okCount++;document.getElementById('so').textContent=okCount;setState('speaking');addMsg('p',d.text);setTimeout(()=>setState('idle'),2000)}if(d.type==='command')addMsg('u',d.text)};ws.onclose=()=>{addLog('Backend disconnected','warn');setTimeout(connectWS,3000)};ws.onerror=()=>{}}catch(e){}}
+connectWS();
+
+// State
+let state='idle',sCount=0,vCount=0,tCount=0,okCount=0;
+const sd=document.getElementById('sdot'),stxt=document.getElementById('stxt'),pst=document.getElementById('pst');
+
+// ── MAIN ORB ──
+const cv=document.getElementById('orb-canvas'),cx=cv.getContext('2d');
+const OW=260,OH=260,OCX=130,OCY=130,OR=104;
+let orbT=0,orbAmp=0,orbTamp=0,orbRx=0,orbRy=0,orbRz=0;
+const OP=[];for(let i=0;i<2000;i++){const th=Math.acos(1-2*(i+.5)/2000);const ph=Math.PI*(1+Math.sqrt(5))*i;OP.push({ox:Math.sin(th)*Math.cos(ph),oy:Math.sin(th)*Math.sin(ph),oz:Math.cos(th),ph:Math.random()*Math.PI*2,sp:0.35+Math.random()*0.65,baseA:0.006+Math.random()*0.016,sz:0.42+Math.random()*0.95,lat:th,lng:ph});}
+function rot(x,y,z,a,b,c){let s,k,ny,nz,nx;s=Math.sin(a);k=Math.cos(a);ny=y*k-z*s;nz=y*s+z*k;y=ny;z=nz;s=Math.sin(b);k=Math.cos(b);nx=x*k+z*s;nz=-x*s+z*k;x=nx;z=nz;s=Math.sin(c);k=Math.cos(c);nx=x*k-y*s;ny=x*s+y*k;return[nx,ny,z];}
+const OC={idle:{h:268,sat:78,c0:'rgba(70,0,140,',c1:'rgba(110,0,190,',c2:'rgba(140,30,220,',c3:'rgba(180,50,255,',sp:'rgba(210,170,255,'},listening:{h:278,sat:92,c0:'rgba(90,0,170,',c1:'rgba(140,0,230,',c2:'rgba(180,50,255,',c3:'rgba(220,80,255,',sp:'rgba(240,200,255,'},thinking:{h:260,sat:84,c0:'rgba(60,0,160,',c1:'rgba(100,20,210,',c2:'rgba(140,60,255,',c3:'rgba(180,80,255,',sp:'rgba(210,190,255,'},speaking:{h:282,sat:96,c0:'rgba(110,0,200,',c1:'rgba(160,0,255,',c2:'rgba(200,60,255,',c3:'rgba(230,100,255,',sp:'rgba(255,225,255,'}};
+function drawOrb(){orbT+=0.016;orbAmp+=(orbTamp-orbAmp)*0.055;const spd=state==='idle'?1:state==='listening'?2.8:state==='thinking'?1.5:2.2;orbRx+=0.00032*spd;orbRy+=0.00088*spd;orbRz+=0.00020*spd;cx.clearRect(0,0,OW,OH);const col=OC[state]||OC.idle;[{r:OR*2.1,a:0.05+orbAmp*0.07,c:col.c0},{r:OR*1.55,a:0.07+orbAmp*0.10,c:col.c1},{r:OR*1.18,a:0.09+orbAmp*0.16,c:col.c2},{r:OR*0.88,a:0.07+orbAmp*0.13,c:col.c3}].forEach(g=>{const gr=cx.createRadialGradient(OCX,OCY,0,OCX,OCY,g.r);gr.addColorStop(0,g.c+g.a+')');gr.addColorStop(1,'transparent');cx.fillStyle=gr;cx.fillRect(0,0,OW,OH);});const pts=OP.map(d=>{const w1=Math.sin(d.lat*4+orbT*d.sp*1.1+d.ph)*0.5+0.5;const w2=Math.cos(d.lng*3+orbT*d.sp*0.75)*0.5+0.5;const base=d.baseA*(w1*w2);let vw=0;if(state!=='idle'&&orbAmp>0.01){const rp=Math.sin(d.ph*2+orbT*d.sp*4)*Math.cos(d.lat*3+orbT*1.8);vw=orbAmp*(0.055+Math.abs(rp)*0.06);}const r=1+Math.min(base+vw,0.16);const[x,y,z]=rot(d.ox*r,d.oy*r,d.oz*r,orbRx,orbRy,orbRz);const bright=(z+1)/2;return{px:OCX+x*OR,py:OCY+y*OR,z,bright,sz:d.sz,vw,wave:w1*w2};});pts.sort((a,b)=>a.z-b.z);for(const p of pts){const{px,py,bright,sz,vw,wave}=p;const alpha=Math.min(1,0.07+bright*0.58+vw*2.8);const dotSz=Math.max(0.18,sz*(0.28+bright*0.72)*(1+vw*3.5));const lightness=26+bright*50+vw*75;const hue=col.h+bright*20+wave*12;const sat=col.sat-8+bright*22;if(vw>0.028&&state!=='idle'){const dg=cx.createRadialGradient(px,py,0,px,py,dotSz*2.8);dg.addColorStop(0,`hsla(${hue},${sat}%,${lightness+22}%,${Math.min(1,alpha*1.2)})`);dg.addColorStop(0.45,`hsla(${hue-8},${sat}%,${lightness+5}%,${alpha*0.55})`);dg.addColorStop(1,`hsla(${hue-20},75%,35%,0)`);cx.fillStyle=dg;cx.beginPath();cx.arc(px,py,dotSz*2.8,0,Math.PI*2);cx.fill();}else{cx.fillStyle=`hsla(${hue},${sat}%,${lightness}%,${alpha*0.88})`;cx.beginPath();cx.arc(px,py,dotSz,0,Math.PI*2);cx.fill();}}const rim=cx.createRadialGradient(OCX,OCY,OR*0.80,OCX,OCY,OR*1.10);rim.addColorStop(0,'transparent');rim.addColorStop(0.5,col.c3+(0.10+orbAmp*0.28)+')');rim.addColorStop(1,'transparent');cx.fillStyle=rim;cx.beginPath();cx.arc(OCX,OCY,OR*1.10,0,Math.PI*2);cx.fill();const spec=cx.createRadialGradient(OCX-26,OCY-30,0,OCX-26,OCY-30,OR*0.40);spec.addColorStop(0,col.sp+(0.20+orbAmp*0.14)+')');spec.addColorStop(1,'transparent');cx.fillStyle=spec;cx.beginPath();cx.arc(OCX-26,OCY-30,OR*0.40,0,Math.PI*2);cx.fill();if(orbAmp>0.08){cx.beginPath();cx.arc(OCX,OCY,OR*(0.91+orbAmp*0.07),0,Math.PI*2);cx.strokeStyle=col.c3+(Math.min(0.9,orbAmp*0.5)+')');cx.lineWidth=0.8+orbAmp*1.8;cx.stroke();}requestAnimationFrame(drawOrb);}
+drawOrb();
+
+// ── SIRI MINI ORB ──
+const sc=document.getElementById('siri-canvas'),sx=sc.getContext('2d');
+const SW=44,SH=44,SCX=22,SCY=22,SR=17;
+let sT=0,sAmp=0,sTamp=0,sRx=0,sRy=0,sRz=0;
+const SP=[];for(let i=0;i<320;i++){const th=Math.acos(1-2*(i+.5)/320);const ph=Math.PI*(1+Math.sqrt(5))*i;SP.push({ox:Math.sin(th)*Math.cos(ph),oy:Math.sin(th)*Math.sin(ph),oz:Math.cos(th),ph:Math.random()*Math.PI*2,sp:0.4+Math.random()*0.6,baseA:0.01+Math.random()*0.02,sz:0.5+Math.random()*0.7,lat:th,lng:ph});}
+function drawSiriOrb(){sT+=0.018;sAmp+=(sTamp-sAmp)*0.07;const spd=state==='idle'?1:state==='listening'?2.8:2.0;sRx+=0.0004*spd;sRy+=0.001*spd;sRz+=0.00025*spd;sx.clearRect(0,0,SW,SH);const g1=sx.createRadialGradient(SCX,SCY,0,SCX,SCY,SR*1.8);g1.addColorStop(0,'rgba(110,0,200,'+(0.12+sAmp*0.18)+')');g1.addColorStop(1,'transparent');sx.fillStyle=g1;sx.fillRect(0,0,SW,SH);const pts=SP.map(d=>{const w1=Math.sin(d.lat*4+sT*d.sp*1.2+d.ph)*0.5+0.5;const w2=Math.cos(d.lng*3+sT*d.sp*0.8)*0.5+0.5;const base=d.baseA*(w1*w2);const vw=state!=='idle'?sAmp*(0.05+Math.sin(d.ph+sT*d.sp*3)*0.04):0;const r=1+Math.min(base+vw,0.18);const[x,y,z]=rot(d.ox*r,d.oy*r,d.oz*r,sRx,sRy,sRz);const bright=(z+1)/2;return{px:SCX+x*SR,py:SCY+y*SR,z,bright,sz:d.sz,vw,wave:w1*w2};});pts.sort((a,b)=>a.z-b.z);for(const p of pts){const{px,py,bright,sz,vw,wave}=p;const alpha=Math.min(1,0.08+bright*0.65+vw*3);const dotSz=Math.max(0.18,sz*(0.3+bright*0.7)*(1+vw*3.5));const hue=270+bright*20+wave*12;const lightness=28+bright*50+vw*70;if(vw>0.025&&state!=='idle'){const dg=sx.createRadialGradient(px,py,0,px,py,dotSz*2.5);dg.addColorStop(0,`hsla(${hue},95%,${lightness+18}%,${alpha})`);dg.addColorStop(1,`hsla(${hue-20},75%,35%,0)`);sx.fillStyle=dg;sx.beginPath();sx.arc(px,py,dotSz*2.5,0,Math.PI*2);sx.fill();}else{sx.fillStyle=`hsla(${hue},88%,${lightness}%,${alpha*0.9})`;sx.beginPath();sx.arc(px,py,dotSz,0,Math.PI*2);sx.fill();}}const rim=sx.createRadialGradient(SCX,SCY,SR*0.80,SCX,SCY,SR*1.08);rim.addColorStop(0,'transparent');rim.addColorStop(0.6,'rgba(180,50,255,'+(0.10+sAmp*0.28)+')');rim.addColorStop(1,'transparent');sx.fillStyle=rim;sx.beginPath();sx.arc(SCX,SCY,SR*1.08,0,Math.PI*2);sx.fill();const spec=sx.createRadialGradient(SCX-5,SCY-6,0,SCX-5,SCY-6,SR*0.38);spec.addColorStop(0,'rgba(230,190,255,'+(0.18+sAmp*0.14)+')');spec.addColorStop(1,'transparent');sx.fillStyle=spec;sx.beginPath();sx.arc(SCX-5,SCY-6,SR*0.38,0,Math.PI*2);sx.fill();requestAnimationFrame(drawSiriOrb);}
+drawSiriOrb();
+
+// ── SIRI POPUP CONTROLS ──
+let siriAutoHideTimer=null;
+function showSiri(statusText,transcriptText){const popup=document.getElementById('siri-popup');const statusEl=document.getElementById('siri-status');const transcriptEl=document.getElementById('siri-transcript');const waveEl=document.getElementById('siri-waveform');popup.classList.add('show');statusEl.textContent=statusText||'LISTENING';statusEl.className=statusText==='STANDBY'?'':'active';if(transcriptText){transcriptEl.textContent=transcriptText;transcriptEl.classList.add('show');}else{transcriptEl.textContent='';transcriptEl.classList.remove('show');}const isActive=state==='listening'||state==='speaking';waveEl.className='siri-waveform'+(isActive?' active':'');sTamp=isActive?(0.35+Math.random()*0.2):0.05;if(siriAutoHideTimer)clearTimeout(siriAutoHideTimer);}
+function hideSiri(){document.getElementById('siri-popup').classList.remove('show');document.getElementById('siri-transcript').classList.remove('show');document.getElementById('siri-waveform').className='siri-waveform';sTamp=0;if(siriAutoHideTimer)clearTimeout(siriAutoHideTimer);}
+function siriAutoHide(ms){if(siriAutoHideTimer)clearTimeout(siriAutoHideTimer);siriAutoHideTimer=setTimeout(hideSiri,ms||3000);}
+
+// ── ORB AMP ──
+function setOrbAmp(s){if(s==='listening'){let v=0;const iv=setInterval(()=>{if(state!=='listening'){clearInterval(iv);orbTamp=0;return;}orbTamp=0.35+Math.sin(v*1.1)*0.2+Math.random()*0.15;v+=0.22;},80);}else if(s==='speaking'){let v=0;const iv=setInterval(()=>{if(state!=='speaking'){clearInterval(iv);orbTamp=0;return;}orbTamp=0.22+Math.abs(Math.sin(v*1.6))*0.28+Math.random()*0.1;v+=0.15;},65);}else if(s==='thinking'){let v=0;const iv=setInterval(()=>{if(state!=='thinking'){clearInterval(iv);orbTamp=0;return;}orbTamp=0.08+Math.sin(v*0.8)*0.06;v+=0.1;},100);}else{orbTamp=0;}}
+
+// ── SET STATE ──
+function setState(s){state=s;const wf=document.getElementById('wf');wf.className='wf '+(['listening','speaking'].includes(s)?'on':'');sd.style.background='';sd.style.boxShadow='';if(s==='idle'){sd.className='sdot';stxt.textContent='STANDBY — SAY "PRAGYA"';pst.textContent='STANDBY';siriAutoHide(1800);}else if(s==='listening'){sd.className='sdot a';stxt.textContent='LISTENING...';pst.textContent='LISTENING';showSiri('LISTENING');document.getElementById('siri-waveform').classList.add('active');sTamp=0.4;}else if(s==='thinking'){sd.className='sdot';sd.style.background='#aa66ff';sd.style.boxShadow='0 0 8px #aa66ff';stxt.textContent='PROCESSING...';pst.textContent='THINKING';showSiri('THINKING...');document.getElementById('siri-waveform').classList.remove('active');sTamp=0.12;}else if(s==='speaking'){sd.className='sdot g';stxt.textContent='RESPONDING...';pst.textContent='SPEAKING';const msgs=document.getElementById('msgs');const lastAI=[...msgs.querySelectorAll('.msg.p')].pop();const txt=lastAI?lastAI.textContent.replace('PRAGYA','').trim().slice(0,60):'';showSiri('SPEAKING',txt);document.getElementById('siri-waveform').classList.add('active');sTamp=0.35;siriAutoHide(4000);}setOrbAmp(s);}
+
+function activateManual(){if(state!=='idle')return;addLog('Manual activation','ok');toast('PRAGYA ACTIVATED');setState('listening');setTimeout(()=>setState('idle'),3000)}
+
+// ── MIC ──
+let micOn=false,rec=null;
+function toggleMic(){if(!('webkitSpeechRecognition'in window||'SpeechRecognition'in window)){toast('USE CHROME FOR VOICE');return}if(micOn){if(rec)rec.stop();micOn=false;document.getElementById('bm').classList.remove('on');setState('idle');return}const SR=window.SpeechRecognition||window.webkitSpeechRecognition;rec=new SR();rec.lang='en-IN';rec.continuous=false;rec.interimResults=true;rec.onstart=()=>{micOn=true;document.getElementById('bm').classList.add('on');setState('listening');};rec.onresult=(e)=>{const t=Array.from(e.results).map(r=>r[0].transcript).join(' ');document.getElementById('ci').value=t;if(e.results[e.results.length-1].isFinal)cmd(t,'voice')};rec.onerror=()=>{micOn=false;document.getElementById('bm').classList.remove('on');setState('idle')};rec.onend=()=>{micOn=false;document.getElementById('bm').classList.remove('on')};rec.start()}
+
+function sendText(){const i=document.getElementById('ci'),v=i.value.trim();if(!v)return;i.value='';cmd(v,'text')}
+function sq(t){cmd(t,'text')}
+
+async function cmd(text,src){if(!text.trim())return;sCount++;if(src==='voice')vCount++;else tCount++;document.getElementById('sc').textContent=sCount;document.getElementById('st').textContent=sCount;document.getElementById('sv').textContent=vCount;document.getElementById('stc').textContent=tCount;addMsg('u',text);addLog('CMD ['+src.toUpperCase()+']: '+text.slice(0,30),'');addRecent(text);setState('thinking');if(ws&&ws.readyState===1){ws.send(JSON.stringify({type:'command',text}));return;}// local fallback
+const rep=local(text);okCount++;document.getElementById('so').textContent=okCount;setState('speaking');addMsg('p',rep);addLog('Local response','ok');if('speechSynthesis'in window){const u=new SpeechSynthesisUtterance(rep);u.rate=0.95;u.onend=()=>setState('idle');speechSynthesis.speak(u)}else setTimeout(()=>setState('idle'),2000);}
+
+function local(t){t=t.toLowerCase();if(t.includes('time'))return'It is '+new Date().toLocaleTimeString('en-IN')+'.';if(t.includes('hello')||t.includes('hi'))return"Hello! I'm Pragya. How can I assist?";if(t.includes('joke'))return"Why do programmers prefer dark mode? Because light attracts bugs!";return'Command acknowledged. Connect the Python backend for full AI responses.'}
+
+function addMsg(r,t){const m=document.getElementById('msgs'),d=document.createElement('div');d.className='msg '+(r==='u'?'u':'p');d.innerHTML='<div class="ml">'+(r==='u'?'YOU':'PRAGYA')+'</div>'+t.replace(/&/g,'&amp;').replace(/</g,'&lt;');m.appendChild(d);m.scrollTop=m.scrollHeight}
+function addLog(msg,type){const l=document.getElementById('log'),n=new Date(),t=String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0')+':'+String(n.getSeconds()).padStart(2,'0'),i=document.createElement('div');i.className='li '+type;i.innerHTML='<span class="lt">'+t+'</span><span class="lm">'+msg+'</span>';l.appendChild(i);if(l.children.length>20)l.removeChild(l.firstChild);l.scrollTop=l.scrollHeight}
+function addRecent(t){const el=document.getElementById('rc');if(el.children.length===1&&el.children[0].textContent==='No commands yet...')el.innerHTML='';const d=document.createElement('div');d.style.cssText='font-family:Share Tech Mono,monospace;font-size:10px;color:var(--text-dim);padding:4px 0;border-bottom:1px solid var(--border);cursor:pointer';d.textContent='> '+t.slice(0,38);d.onclick=()=>{document.getElementById('ci').value=t};el.insertBefore(d,el.firstChild);if(el.children.length>8)el.removeChild(el.lastChild)}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2800)}
+
+let tb='';document.addEventListener('keypress',e=>{if(e.target.tagName==='INPUT')return;tb+=e.key.toLowerCase();if(tb.length>10)tb=tb.slice(-10);if(tb.includes('pragya')){tb='';addLog('Wake word: "pragya"','ok');toast('WAKE WORD DETECTED');setState('listening');setTimeout(()=>setState('idle'),3000)}});
+addLog('System boot complete','ok');addLog('Wake word engine active','ok');toast('PRAGYA ONLINE — SAY MY NAME');
+</script>
+</body>
+</html>

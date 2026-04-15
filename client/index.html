@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pragya AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&family=Exo+2:wght@100;200;300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--cyan:#00d4ff;--cyan-dim:#0099cc;--cyan-glow:rgba(0,212,255,0.15);--cyan-glow2:rgba(0,212,255,0.05);--bg:#000408;--bg2:#010c14;--text:#a0d8ef;--text-dim:#3a6a88;--border:rgba(0,212,255,0.12);--green:#00ff88;--amber:#ffaa00}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Exo 2',sans-serif;font-weight:200;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);animation:scan 4s linear infinite;z-index:1000;opacity:.5}
+@keyframes scan{0%{transform:translateY(0)}100%{transform:translateY(100vh)}}
+body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,212,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.02) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0}
+header{position:fixed;top:0;left:0;right:0;height:52px;background:rgba(0,4,8,.95);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 24px;z-index:100;backdrop-filter:blur(12px)}
+.logo{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:20px;letter-spacing:4px;color:var(--cyan);text-transform:uppercase}.logo span{color:var(--text-dim);font-weight:300}
+.hc{display:flex;align-items:center;gap:6px}
+.sdot{width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan);animation:pdot 2s ease-in-out infinite}
+.sdot.g{background:var(--green);box-shadow:0 0 8px var(--green)}.sdot.a{background:var(--amber);box-shadow:0 0 12px var(--amber);animation:pf .5s ease-in-out infinite}
+@keyframes pdot{0%,100%{opacity:1}50%{opacity:.4}}@keyframes pf{0%,100%{opacity:1}50%{opacity:.2}}
+#stxt{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cyan-dim);letter-spacing:2px;text-transform:uppercase}
+.hr{display:flex;align-items:center;gap:20px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--text-dim);letter-spacing:1px}
+main{padding-top:52px;display:grid;grid-template-columns:280px 1fr 280px;height:100vh}
+.pl,.pr{background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow-y:auto;padding:16px;gap:12px}
+.pr{border-right:none;border-left:1px solid var(--border)}
+.w{border:1px solid var(--border);border-radius:2px;padding:14px;background:rgba(0,212,255,.02);position:relative;overflow:hidden}
+.w::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--cyan);opacity:.4}
+.wt{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--cyan-dim);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.wt::after{content:'';flex:1;height:1px;background:var(--border)}
+#clk{font-family:'Rajdhani',sans-serif;font-size:38px;font-weight:300;color:var(--cyan);letter-spacing:4px;line-height:1}
+#dstr{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:2px;margin-top:4px}
+.sr{display:flex;flex-direction:column;gap:4px;margin-bottom:10px}
+.sl{display:flex;justify-content:space-between;font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:1px}
+.sb{height:3px;background:rgba(0,212,255,.08);border-radius:1px;overflow:hidden}
+.sf{height:100%;background:var(--cyan);box-shadow:0 0 6px var(--cyan);transition:width 1s ease}
+.sf.a{background:var(--amber);box-shadow:0 0 6px var(--amber)}.sf.g{background:var(--green);box-shadow:0 0 6px var(--green)}
+.ll{display:flex;flex-direction:column;gap:6px;max-height:160px;overflow-y:auto}
+.li{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--text-dim);display:flex;gap:8px;padding:4px 0;border-bottom:1px solid rgba(0,212,255,.04);animation:fi .3s ease}
+@keyframes fi{from{opacity:0;transform:translateX(-4px)}to{opacity:1;transform:translateX(0)}}
+.lt{color:var(--cyan-dim);min-width:52px}.li.warn .lm{color:var(--amber)}.li.ok .lm{color:var(--green)}
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.sk{padding:6px 8px;border:1px solid var(--border);font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:1px;text-align:center;color:var(--text-dim);cursor:pointer;transition:all .2s}
+.sk:hover,.sk.on{border-color:var(--cyan);color:var(--cyan);background:var(--cyan-glow2)}.sk.on{box-shadow:0 0 8px rgba(0,212,255,.2)}
+.ct{display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.oc{position:relative;width:260px;height:260px;cursor:pointer;z-index:10}
+#orb-canvas{display:block;cursor:pointer}
+.wf{display:flex;align-items:center;gap:3px;height:40px;margin-top:20px}
+.wb{width:3px;background:var(--cyan);border-radius:2px;opacity:.4;height:4px}
+.wf.on .wb{animation:wv .6s ease-in-out infinite;opacity:.9}
+.wb:nth-child(1){animation-delay:0s}.wb:nth-child(2){animation-delay:.05s}.wb:nth-child(3){animation-delay:.1s}.wb:nth-child(4){animation-delay:.15s}.wb:nth-child(5){animation-delay:.2s}.wb:nth-child(6){animation-delay:.25s}.wb:nth-child(7){animation-delay:.3s}.wb:nth-child(8){animation-delay:.35s}.wb:nth-child(9){animation-delay:.4s}.wb:nth-child(10){animation-delay:.45s}.wb:nth-child(11){animation-delay:.5s}.wb:nth-child(12){animation-delay:.55s}
+@keyframes wv{0%,100%{height:4px}50%{height:28px}}
+#pst{font-family:'Share Tech Mono',monospace;font-size:12px;letter-spacing:4px;color:var(--cyan-dim);text-transform:uppercase;margin-top:12px;text-align:center}
+.ir{display:flex;gap:8px;margin-top:28px;width:100%;max-width:520px;z-index:10}
+.ci{flex:1;background:rgba(0,212,255,.04);border:1px solid var(--border);color:var(--cyan);padding:10px 16px;font-family:'Share Tech Mono',monospace;font-size:12px;letter-spacing:1px;outline:none;transition:border-color .2s}
+.ci:focus{border-color:var(--cyan);background:var(--cyan-glow2)}.ci::placeholder{color:var(--text-dim)}
+.bm,.bs{width:44px;height:44px;background:rgba(0,212,255,.08);border:1px solid var(--border);color:var(--cyan);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;font-size:16px}
+.bm:hover,.bs:hover{background:var(--cyan-glow);border-color:var(--cyan)}.bm.on{background:rgba(255,160,0,.15);border-color:var(--amber);color:var(--amber);animation:pf .5s infinite}
+#msgs{width:100%;max-width:520px;max-height:180px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;margin-top:16px;z-index:10;padding:0 4px}
+.msg{padding:8px 12px;font-family:'Exo 2',sans-serif;font-size:13px;font-weight:300;border-left:2px solid var(--border);animation:fi .3s ease}
+.msg.u{background:rgba(0,212,255,.04);border-left:none;border-right:2px solid var(--cyan-dim);align-self:flex-end;text-align:right}
+.msg.p{background:rgba(0,212,255,.02);border-left-color:var(--cyan)}
+.ml{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--cyan);margin-bottom:3px}.msg.u .ml{color:var(--cyan-dim)}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--border)}
+.ctl,.ctr,.cbl,.cbr{position:absolute;width:20px;height:20px;z-index:1}
+.ctl{top:16px;left:16px;border-top:1px solid var(--cyan-dim);border-left:1px solid var(--cyan-dim)}
+.ctr{top:16px;right:16px;border-top:1px solid var(--cyan-dim);border-right:1px solid var(--cyan-dim)}
+.cbl{bottom:16px;left:16px;border-bottom:1px solid var(--cyan-dim);border-left:1px solid var(--cyan-dim)}
+.cbr{bottom:16px;right:16px;border-bottom:1px solid var(--cyan-dim);border-right:1px solid var(--cyan-dim)}
+.cmds{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;justify-content:center;max-width:520px;z-index:10}
+.cc{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:1px;padding:4px 10px;border:1px solid rgba(0,212,255,.15);color:var(--text-dim);cursor:pointer;transition:all .2s}
+.cc:hover{border-color:var(--cyan);color:var(--cyan);background:var(--cyan-glow2)}
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(60px);background:rgba(0,4,8,.95);border:1px solid var(--cyan);padding:10px 24px;font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--cyan);z-index:999;transition:transform .3s;box-shadow:0 0 20px rgba(0,212,255,.2)}
+#toast.show{transform:translateX(-50%) translateY(0)}
+
+/* ── SIRI POPUP ── */
+#siri-popup{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(120px) scale(0.85);opacity:0;pointer-events:none;z-index:2000;transition:transform .45s cubic-bezier(.34,1.56,.64,1),opacity .35s ease;display:flex;flex-direction:column;align-items:center;gap:10px}
+#siri-popup.show{transform:translateX(-50%) translateY(0) scale(1);opacity:1;pointer-events:auto}
+#siri-pill{background:rgba(4,2,12,.92);border:1px solid rgba(160,60,255,.35);border-radius:60px;padding:10px 20px 10px 12px;display:flex;align-items:center;gap:12px;box-shadow:0 0 32px rgba(140,0,255,.25),0 0 80px rgba(100,0,200,.12),inset 0 0 20px rgba(120,0,220,.06);backdrop-filter:blur(20px);min-width:220px}
+#siri-orb-wrap{width:44px;height:44px;flex-shrink:0;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center}
+#siri-canvas{display:block}
+#siri-info{display:flex;flex-direction:column;gap:2px;flex:1}
+#siri-name{font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:600;letter-spacing:3px;color:#cc66ff;text-shadow:0 0 12px rgba(180,60,255,.6);text-transform:uppercase}
+#siri-status{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;color:#7744aa;transition:color .3s}
+#siri-status.active{color:#cc88ff;text-shadow:0 0 8px rgba(180,80,255,.5)}
+#siri-waveform{display:flex;align-items:center;gap:2px;height:20px}
+#siri-waveform span{display:block;width:2px;background:#9944cc;border-radius:2px;height:3px;transition:height .1s}
+#siri-close{width:22px;height:22px;border-radius:50%;border:1px solid rgba(160,60,255,.25);background:rgba(100,0,180,.15);color:#7744aa;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;transition:all .2s}
+#siri-close:hover{border-color:rgba(200,100,255,.5);color:#cc88ff}
+#siri-transcript{font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:1px;color:#cc88ff;background:rgba(60,0,100,.4);border:1px solid rgba(140,50,255,.2);border-radius:20px;padding:6px 18px;max-width:320px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:0;transition:opacity .3s;min-height:30px;display:flex;align-items:center;justify-content:center}
+#siri-transcript.show{opacity:1}
+@keyframes siri-wb{0%,100%{height:3px}50%{height:16px}
+#siri-waveform.active span:nth-child(1){animation:siri-wb .5s ease-in-out infinite 0s}
+#siri-waveform.active span:nth-child(2){animation:siri-wb .5s ease-in-out infinite .07s}
+#siri-waveform.active span:nth-child(3){animation:siri-wb .5s ease-in-out infinite .14s}
+#siri-waveform.active span:nth-child(4){animation:siri-wb .5s ease-in-out infinite .21s}
+#siri-waveform.active span:nth-child(5){animation:siri-wb .5s ease-in-out infinite .14s}
+#siri-waveform.active span:nth-child(6){animation:siri-wb .5s ease-in-out infinite .07s}
+#siri-waveform.active span:nth-child(7){animation:siri-wb .5s ease-in-out infinite 0s}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">PRAGYA<span> / AI</span></div>
+  <div class="hc"><div class="sdot" id="sdot"></div><span id="stxt">STANDBY — SAY "PRAGYA"</span></div>
+  <div class="hr"><span id="ht">--:--:--</span><span>|</span><span>SYS v2.1</span><span>|</span><span id="sc" style="color:var(--cyan)">0</span> CMDS</div>
+</header>
+<main>
+<div class="pl">
+  <div class="w"><div class="wt">Clock</div><div id="clk">00:00</div><div id="dstr">LOADING...</div></div>
+  <div class="w"><div class="wt">System</div>
+    <div class="sr"><div class="sl"><span>CPU</span><span id="cv">0%</span></div><div class="sb"><div class="sf a" id="cb" style="width:0%"></div></div></div>
+    <div class="sr"><div class="sl"><span>MEM</span><span id="mv">0%</span></div><div class="sb"><div class="sf" id="mb" style="width:0%"></div></div></div>
+    <div class="sr"><div class="sl"><span>AI LATENCY</span><span id="lv">0ms</span></div><div class="sb"><div class="sf g" id="lb" style="width:0%"></div></div></div>
+    <div class="sr"><div class="sl"><span>VOICE CONF</span><span id="vv">0%</span></div><div class="sb"><div class="sf g" id="vb" style="width:0%"></div></div></div>
+  </div>
+  <div class="w"><div class="wt">Capabilities</div><div class="sg">
+    <div class="sk on" onclick="this.classList.toggle('on')">VOICE</div><div class="sk on" onclick="this.classList.toggle('on')">SEARCH</div>
+    <div class="sk" onclick="this.classList.toggle('on')">SMART HOME</div><div class="sk on" onclick="this.classList.toggle('on')">EMAIL</div>
+    <div class="sk on" onclick="this.classList.toggle('on')">CALENDAR</div><div class="sk" onclick="this.classList.toggle('on')">MUSIC</div>
+    <div class="sk on" onclick="this.classList.toggle('on')">CODE</div><div class="sk" onclick="this.classList.toggle('on')">CAMERA</div>
+  </div></div>
+  <div class="w"><div class="wt">Wake word</div>
+    <div style="text-align:center;padding:8px 0">
+      <div style="font-family:'Rajdhani',sans-serif;font-size:28px;color:var(--cyan);letter-spacing:8px;font-weight:600">PRAGYA</div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--text-dim);letter-spacing:2px;margin-top:4px">ALWAYS LISTENING</div>
+    </div>
+  </div>
+</div>
+
+<div class="ct">
+  <div class="ctl"></div><div class="ctr"></div><div class="cbl"></div><div class="cbr"></div>
+  <div class="oc" onclick="activateManual()"><canvas id="orb-canvas" width="260" height="260"></canvas></div>
+  <div class="wf" id="wf"><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div></div>
+  <div id="pst">STANDBY</div>
+  <div id="msgs"></div>
+  <div class="cmds">
+    <div class="cc" onclick="sq('What time is it?')">TIME</div>
+    <div class="cc" onclick="sq('Tell me a fun fact')">FUN FACT</div>
+    <div class="cc" onclick="sq('What can you do?')">CAPABILITIES</div>
+    <div class="cc" onclick="sq('Tell me a joke')">JOKE</div>
+    <div class="cc" onclick="sq('Set a reminder for tomorrow')">REMINDER</div>
+  </div>
+  <div class="ir">
+    <input class="ci" id="ci" type="text" placeholder="Type a command or say 'pragya'..." onkeydown="if(event.key==='Enter')sendText()"/>
+    <button class="bm" id="bm" onclick="toggleMic()">&#127908;</button>
+    <button class="bs" onclick="sendText()">&#10148;</button>
+  </div>
+</div>
+
+<div class="pr">
+  <div class="w"><div class="wt">Activity log</div><div class="ll" id="log">
+    <div class="li ok"><span class="lt">00:00:00</span><span class="lm">PRAGYA initialized</span></div>
+    <div class="li"><span class="lt">00:00:00</span><span class="lm">Wake word engine ready</span></div>
+  </div></div>
+  <div class="w"><div class="wt">Session stats</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <div style="text-align:center;padding:8px;border:1px solid var(--border)"><div style="font-family:'Rajdhani',sans-serif;font-size:26px;color:var(--cyan)" id="st">0</div><div style="font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--text-dim);letter-spacing:1px">TOTAL</div></div>
+      <div style="text-align:center;padding:8px;border:1px solid var(--border)"><div style="font-family:'Rajdhani',sans-serif;font-size:26px;color:var(--green)" id="so">0</div><div style="font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--text-dim);letter-spacing:1px">SUCCESS</div></div>
+      <div style="text-align:center;padding:8px;border:1px solid var(--border)"><div style="font-family:'Rajdhani',sans-serif;font-size:26px;color:var(--amber)" id="sv">0</div><div style="font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--text-dim);letter-spacing:1px">VOICE</div></div>
+      <div style="text-align:center;padding:8px;border:1px solid var(--border)"><div style="font-family:'Rajdhani',sans-serif;font-size:26px;color:var(--text-dim)" id="stc">0</div><div style="font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--text-dim);letter-spacing:1px">TEXT</div></div>
+    </div>
+  </div>
+  <div class="w"><div class="wt">Recent commands</div>
+    <div id="rc" style="display:flex;flex-direction:column;gap:6px;max-height:160px;overflow-y:auto">
+      <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--text-dim)">No commands yet...</div>
+    </div>
+  </div>
+  <div class="w"><div class="wt">Phase tracker</div><div style="display:flex;flex-direction:column;gap:8px">
+    <div style="display:flex;align-items:center;gap:8px"><div style="width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green)"></div><span style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--green)">PHASE 1 — Voice + Chat</span></div>
+    <div style="display:flex;align-items:center;gap:8px"><div style="width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green)"></div><span style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--green)">PHASE 2 — Tools + APIs</span></div>
+    <div style="display:flex;align-items:center;gap:8px"><div style="width:8px;height:8px;border-radius:50%;background:var(--amber)"></div><span style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--text-dim)">PHASE 3 — Memory + RAG</span></div>
+    <div style="display:flex;align-items:center;gap:8px"><div style="width:8px;height:8px;border-radius:50%;border:1px solid var(--text-dim)"></div><span style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--text-dim)">PHASE 4 — OS Control</span></div>
+    <div style="display:flex;align-items:center;gap:8px"><div style="width:8px;height:8px;border-radius:50%;border:1px solid var(--text-dim)"></div><span style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--text-dim)">PHASE 5 — Proactive AI</span></div>
+  </div></div>
+</div>
+</main>
+
+<!-- SIRI POPUP -->
+<div id="siri-popup">
+  <div id="siri-transcript"></div>
+  <div id="siri-pill">
+    <div id="siri-orb-wrap"><canvas id="siri-canvas" width="44" height="44"></canvas></div>
+    <div id="siri-info">
+      <div id="siri-name">PRAGYA</div>
+      <div id="siri-status">STANDBY</div>
+    </div>
+    <div id="siri-waveform"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    <div id="siri-close" onclick="hideSiri()">✕</div>
+  </div>
+</div>
+
+<div id="toast"></div>
+<script src="/app.js" defer></script>
+</body>
+</html>

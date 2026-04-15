@@ -1,0 +1,10 @@
+{
+  "name": "pragya",
+  "version": "1.0.0",
+  "scripts": {
+    "ui": "vite dashboard"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
+}
